@@ -1,0 +1,68 @@
+# SELECT * FROM client WHERE LENGTH(FirstName)=6;
+# SELECT * FROM department WHERE DepartmentCity='Lviv';
+# SELECT * FROM client WHERE Education='high' ORDER BY LastName
+# SELECT * FROM application ORDER BY idApplication DESC /todo
+# SELECT * FROM client as c WHERE c.LastName LIKE '%k' OR c.LastName LIKE '%a'
+# SELECT client.FirstName,DepartmentCity FROM client JOIN department d on client.Department_idDepartment = d.idDepartment WHERE DepartmentCity='Kyiv'
+# SELECT client.FirstName,client.Passport FROM client GROUP BY FirstName
+# SELECT c.FirstName,c.LastName,c.Passport,c.LastName,c.Age,c.City,a.Sum,a.Currency FROM client c JOIN application a on c.idClient = a.Client_idClient WHERE Sum>5000 AND Currency='Gryvnia'
+# SELECT COUNT(City) as Clien_count FROM client; #НЕ ЗНАВ ЯК ЗРОБИТИ ОДНИМ ЗАПИТОМ 9
+# SELECT COUNT(City) as Clien_count FROM client where City='Lviv';
+
+# 10
+# SELECT FirstName,MAX(Sum) as MaxSum FROM client
+# join application a on client.idClient = a.Client_idClient
+# GROUP BY client.FirstName;
+
+#11
+# SELECT FirstName, COUNT(FirstName) FROM client
+# JOIN application a on client.idClient = a.Client_idClient
+# GROUP BY  client.FirstName
+
+# 12
+# SELECT MIN(Sum),MAX(Sum) FROM application
+
+# 13
+# SELECT COUNT(c.Education) FROM application
+# JOIN client c on c.idClient = application.Client_idClient
+# WHERE Education='high'
+
+# 14
+# SELECT FirstName,AVG(Sum) FROM client
+# JOIN application a on client.idClient = a.Client_idClient
+# GROUP BY Sum ORDER BY Sum DESC  #неЗНАЮ ЯК ВИВТИ ПЕРШИЙ В СПИСКУ
+
+#15
+# SELECT SUM(Sum) FROM application
+# JOIN client c on c.idClient = application.Client_idClient
+# JOIN department d on d.idDepartment = c.Department_idDepartment
+# group by DepartmentCity
+
+
+
+# 16
+# SELECT MAX(Sum),DepartmentCity from application
+# JOIN client c on application.Client_idClient = c.idClient
+# JOIN department d on d.idDepartment = c.Department_idDepartment
+# order by Department_idDepartment
+
+# 17
+# UPDATE application
+# JOIN client c on c.idClient = application.Client_idClient
+# set Sum=6000
+# WHERE Education='high' ???
+
+# 18
+# UPDATE client
+# JOIN application a on client.idClient = a.Client_idClient
+# JOIN department d on d.idDepartment = client.Department_idDepartment
+# set City='Kyiv'
+# WHERE DepartmentCity='Kyiv' ???
+
+#19
+# delete from application
+# where CreditState='Not returned'
+
+# 20
+# delete from application
+# WHERE (select idClient from client WHERE LastName LIKE '_[aoieuy]%') ??
