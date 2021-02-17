@@ -72,3 +72,47 @@ db.getCollection('students').find({
   parents:1,
   _id:0
 })
+#15
+db.getCollection('students').remove({
+    avgScore:{$lt:2.5}
+    }
+)
+#16
+db.getCollection('students').updateMany(
+{'parents.profession':'teacher'},
+{$set:{avgScore:5}}
+)
+#17
+db.getCollection('students').find(
+{
+   $and:[
+    {class:{$lt:5}},
+    {lessons:'physics'}
+    ]
+  
+}
+)
+#18
+db.getCollection('students').aggregate([
+    {
+        $group: {
+            _id: "$class",
+            avgScore: {
+                $avg: "$avgScore"
+            }
+        }
+    },
+    {
+        $sort:{'avgScore':-1}
+    },
+    {
+        $limit:1
+    },
+    {
+        $project: {
+            "avgScore":1,
+            "class": "$_id",
+            "_id": 0
+        }
+    }
+])
